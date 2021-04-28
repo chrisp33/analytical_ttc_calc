@@ -45,9 +45,11 @@ else:
 		
 	st.markdown(f'## Analytical TTC based on {anal_conc} mg/mL:')
 
-	val = ttc*ext_ratio/1000/anal_conc*100
-	# if float()
-	st.title('{:.3f} mg/mL'.format(round(val,2)))
+	try:
+		val = ttc*ext_ratio/1000/anal_conc*100
+	except ZeroDivisionError: #addresses initial conc = 0.00
+		val = 0
+	st.title('{:.3f} mg/mL'.format(val))
 
 
 
